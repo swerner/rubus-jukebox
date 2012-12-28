@@ -1,0 +1,4 @@
+.DS_Store
+server/spotify_appkey.key
+tmp/
+server/tmp

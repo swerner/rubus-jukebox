@@ -1,0 +1,43 @@
+!!!5
+%html
+  %head
+    %link{rel: "stylesheet", type: "text/css", href: "/css/bootstrap.min.css"}
+    %link{rel: "stylesheet", type: "text/css", href: "/css/application.css"}
+    %link{rel: "stylesheet", type: "text/css", href: "/css/bootstrap-responsive.min.css"}
+    %script{src: "js/jquery-1.8.3.min.js" }
+    %script{src: "application.js" }
+  %body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.brand Rubus Jukebox
+          %ul.nav
+            %li.active
+              %a{ href: "/" } Home
+            %li
+              %a#playlists Playlists
+            %li
+              %a#starred Starred
+    .container
+      .row
+        .span4
+          %h2 Now Playing
+          #now-playing
+          %h2 Queue
+          %ol.queue
+
+        .span4.starred
+          %h2 Starred
+          %table.table.table-hover
+            %thead
+              %th Name
+              %th Artist
+            %tbody
+              = starred.each do |track|
+                %tr.track{ "data-id" => track.to_link.to_str }
+                  %td= track.name
+                  %td= track.artist.load.name
+        .span4
+          %h2 Controls
+          %button#stop_button.btn.btn-large.btn-danger Stop
+
