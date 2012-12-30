@@ -7,4 +7,5 @@ gem 'haml'
 gem 'json'
 gem 'pry'
 gem 'coffee-script'
-
+gem 'rspec'
+gem 'rack-test'

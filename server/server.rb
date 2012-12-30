@@ -21,6 +21,7 @@ while (session = server.accept)
     c = Client.new(s,jukebox)
     Thread.current['client'] = c
     c.start
+    puts "Closing connection"
     s.close
   end
 end

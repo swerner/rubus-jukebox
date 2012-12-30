@@ -15,7 +15,7 @@ module Rubus
     end
 
     def to_json
-      @queue.map(&:to_s).to_json
+      @queue.map(&:to_h).to_json
     end
 
     def length

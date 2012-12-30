@@ -11,5 +11,9 @@ module Rubus
     def to_s
       "#{artist} - #{name}"
     end
+
+    def to_h
+      {id: @id, name: @name, artist: @artist}
+    end
   end
 end

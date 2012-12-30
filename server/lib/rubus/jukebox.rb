@@ -1,5 +1,6 @@
 module Rubus
   class Jukebox
+    attr_reader :session, :user, :player, :queue, :now_playing
     def initialize
       @session = Hallon::Session.initialize IO.read('./spotify_appkey.key')
       @session.login!(ENV['SPOTIFY_USER'], ENV['SPOTIFY_PASS'])
@@ -9,22 +10,14 @@ module Rubus
       @now_playing = nil
 
       @session.on(:end_of_track) do
-        Jukebox.handle_track_ending
+        handle_track_ending
       end
-    end
-
-    def queue
-      @queue
-    end
-
-    def user
-      @user
     end
 
     def enqueue(track)
       track = Hallon::Track.new(track).load
       @queue << track unless @queue.include?(track)
-      Rubus::Jukebox.play(@queue.pop) if @now_playing.nil?
+      play(@queue.pop) if @now_playing.nil?
     end
 
     def handle_track_ending

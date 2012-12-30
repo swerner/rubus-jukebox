@@ -16,15 +16,12 @@ after do
 end
 
 get '/' do
-  haml :index, locals: {
-                         starred: @jukebox.cmd("starred")
-                        }
+  haml :index, locals: { starred: JSON.parse(@jukebox.cmd("starred"))}
 end
 
 get "/play/:trackid" do
   @jukebox.cmd("enqueue #{params[:trackid]}")
   content_type :json
-  true
 end
 
 get "/application.js" do

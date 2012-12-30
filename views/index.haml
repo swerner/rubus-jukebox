@@ -33,10 +33,10 @@
               %th Name
               %th Artist
             %tbody
-              = starred.each do |track|
-                %tr.track{ "data-id" => track.to_link.to_str }
-                  %td= track.name
-                  %td= track.artist.load.name
+              - starred.each do |track|
+                %tr.track{ "data-id" => track["id"] }
+                  %td= track["name"]
+                  %td= track["artist"]
         .span4
           %h2 Controls
           %button#stop_button.btn.btn-large.btn-danger Stop
