@@ -5,9 +5,9 @@ module Rubus
       @session = Hallon::Session.initialize IO.read('./spotify_appkey.key')
       @session.login!(ENV['SPOTIFY_USER'], ENV['SPOTIFY_PASS'])
       @user = Hallon::User.new(ENV["SPOTIFY_USER"])
-      @player = Hallon::Player.new(Hallon::OpenAL)
       @queue = Rubus::TrackQueue.new
       @now_playing = nil
+      @player = Hallon::Player.new(Hallon::OpenAL)
 
       @session.on(:end_of_track) do
         handle_track_ending
@@ -39,11 +39,11 @@ module Rubus
 
     def play(track = @now_playing)
       @now_playing = track.to_s
-      @player.send(:play, track.id)
+      @player.play track.id
     end
 
     def stop
-      @player.send(:stop)
+      @player.stop
       @now_playing = nil
     end
 
